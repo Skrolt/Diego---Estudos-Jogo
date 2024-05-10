@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Adivinhação</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        #play-button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #result {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jogo de Adivinhação</h1>
+    <button id="play-button">Play</button>
+    <div id="result"></div>
+
+    <script>
+        function playGame() {
+            const numberToGuess = Math.floor(Math.random() * 100) + 1;
+            let attempts = 0;
+
+            while (true) {
+                const guess = prompt("Tente adivinhar o número (entre 1 e 100):");
+                if (guess === null) {
+                    alert("Jogo cancelado.");
+                    break;
+                }
+
+                attempts++;
+
+                if (isNaN(guess) || guess < 1 || guess > 100) {
+                    alert("Por favor, insira um número válido entre 1 e 100.");
+                } else if (guess == numberToGuess) {
+                    document.getElementById("result").innerText = "Parabéns! Você acertou o número " + numberToGuess + " em " + attempts + " tentativas.";
+                    break;
+                } else if (guess < numberToGuess) {
+                    alert("O número é maior que " + guess + ". Tente novamente.");
+                } else {
+                    alert("O número é menor que " + guess + ". Tente novamente.");
+                }
+            }
+        }
+
+        document.getElementById("play-button").addEventListener("click", playGame);
+    </script>
+</body>
+</html>

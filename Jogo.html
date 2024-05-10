@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedra, Papel e Tesoura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        #play-button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #result {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pedra, Papel e Tesoura</h1>
+    <button id="play-button">Play</button>
+    <div id="result"></div>
+
+    <script>
+        const choices = ["pedra", "papel", "tesoura"];
+        
+        function computerChoice() {
+            const index = Math.floor(Math.random() * choices.length);
+            return choices[index];
+        }
+
+        function playRound(playerChoice) {
+            const computer = computerChoice();
+            const player = playerChoice.toLowerCase();
+            
+            let result;
+            if (player === computer) {
+                result = "Empate!";
+            } else if (
+                (player === "pedra" && computer === "tesoura") ||
+                (player === "papel" && computer === "pedra") ||
+                (player === "tesoura" && computer === "papel")
+            ) {
+                result = "Você ganhou!";
+            } else {
+                result = "Você perdeu!";
+            }
+            document.getElementById("result").innerText = "Você escolheu: " + player + ". O computador escolheu: " + computer + ". " + result;
+        }
+
+        document.getElementById("play-button").addEventListener("click", function() {
+            const playerChoice = prompt("Escolha pedra, papel ou tesoura:");
+            if (playerChoice && choices.includes(playerChoice.toLowerCase())) {
+                playRound(playerChoice);
+            } else {
+                alert("Escolha inválida. Tente novamente!");
+            }
+        });
+    </script>
+</body>
+</html>
